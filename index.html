@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' 'unsafe-inline';
+                 img-src 'self' data: https:;
+                 frame-src https:;
+                 connect-src 'self' https:;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Two Feeds – A/B</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="pane-controls" data-target="left">
+      <strong>A</strong>
+      <input id="url-left" placeholder="https://www.linkedin.com/feed/" value="https://www.linkedin.com/feed/" />
+      <button data-action="go">Go</button>
+      <button data-action="back">◀</button>
+      <button data-action="forward">▶</button>
+      <button data-action="reload">↻</button>
+      <button data-action="home">Home</button>
+      <button data-action="reset">Reset</button>
+      <button data-action="test-search">Test Search</button>
+    </div>
+    <div class="pane-controls" data-target="right">
+      <strong>B</strong>
+      <input id="url-right" placeholder="https://www.linkedin.com/feed/" value="https://www.linkedin.com/feed/" />
+      <button data-action="go">Go</button>
+      <button data-action="back">◀</button>
+      <button data-action="forward">▶</button>
+      <button data-action="reload">↻</button>
+      <button data-action="home">Home</button>
+      <button data-action="reset">Reset</button>
+      <button data-action="test-search">Test Search</button>
+    </div>
+  </header>
+
+  <main>
+     <webview id="wv-left"  partition="persist:userA" preload="wv-preload.js" allowpopups src="https://www.linkedin.com/feed/"></webview>
+     <webview id="wv-right" partition="persist:userB" preload="wv-preload.js" allowpopups src="https://www.linkedin.com/feed/"></webview>
+  </main>
+
+  <footer>
+    <small>Tip: Log in on each side once; sessions persist per partition. Use Home if LinkedIn navigates away.</small>
+  </footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
